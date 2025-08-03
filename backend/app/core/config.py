@@ -14,8 +14,10 @@ class Settings(BaseSettings):
     # CORS
     ALLOWED_HOSTS: List[str] = ["http://localhost:3000", "http://localhost:8000"]
     
-    # AI/LLM
+    # AI/LLM - Support both OpenAI and Google Gemini
     OPENAI_API_KEY: str = ""
+    GEMINI_API_KEY: str = ""
+    AI_PROVIDER: str = "openai"  # "openai" or "gemini"
     
     # Vector Database
     WEAVIATE_URL: str = "http://localhost:8080"

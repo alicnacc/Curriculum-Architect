@@ -1,4 +1,5 @@
 from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_community.tools import DuckDuckGoSearchRun
@@ -16,11 +17,21 @@ import weaviate
 
 class AgentService:
     def __init__(self):
-        self.llm = ChatOpenAI(
-            model="gpt-4",
-            temperature=0.7,
-            api_key=settings.OPENAI_API_KEY
-        )
+        # Initialize AI provider based on configuration
+        if settings.AI_PROVIDER.lower() == "gemini":
+            self.llm = ChatGoogleGenerativeAI(
+                model="gemini-pro",
+                temperature=0.7,
+                google_api_key=settings.GEMINI_API_KEY
+            )
+        else:
+            # Default to OpenAI
+            self.llm = ChatOpenAI(
+                model="gpt-4",
+                temperature=0.7,
+                api_key=settings.OPENAI_API_KEY
+            )
+        
         self.search_tool = DuckDuckGoSearchRun()
         self.vector_service = VectorService()
         self.mcp_adapter = MCPAdapter()

@@ -9,12 +9,13 @@ An AI-powered, multi-platform learning companion that creates personalized educa
 - **Multi-Platform Delivery**: Email digests and push notifications for continuous learning
 - **Real-time Progress Tracking**: Monitor and adjust learning progress dynamically
 - **Modern Web Interface**: Clean, responsive UI built with Next.js and React
+- **Multi-AI Provider Support**: Works with OpenAI GPT-4 and Google Gemini Pro
 
 ## Technology Stack
 
 ### Backend
 - **Framework**: FastAPI (Python)
-- **AI/LLM**: LangChain + LangGraph
+- **AI/LLM**: LangChain + LangGraph (OpenAI GPT-4 or Google Gemini Pro)
 - **Database**: PostgreSQL
 - **Vector Database**: Weaviate
 - **Multi-Platform**: langchain-mcp-adapters
@@ -56,6 +57,7 @@ curriculum-architect/
 - Docker and Docker Compose
 - PostgreSQL
 - Weaviate
+- **AI Provider**: OpenAI API key OR Google Gemini API key
 
 ### Backend Setup
 
@@ -143,7 +145,12 @@ WEAVIATE_URL=http://localhost:8080
 SECRET_KEY=your-secret-key
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+# Choose one AI provider:
 OPENAI_API_KEY=your-openai-api-key
+GEMINI_API_KEY=your-google-gemini-api-key
+AI_PROVIDER=openai  # "openai" or "gemini"
+
 SENDGRID_API_KEY=your-sendgrid-api-key
 FIREBASE_CREDENTIALS=path/to/firebase-credentials.json
 ```
@@ -153,6 +160,28 @@ FIREBASE_CREDENTIALS=path/to/firebase-credentials.json
 NEXT_PUBLIC_API_URL=http://localhost:8000
 NEXT_PUBLIC_WEBSOCKET_URL=ws://localhost:8000/ws
 ```
+
+## AI Provider Configuration
+
+The application supports both OpenAI and Google Gemini APIs:
+
+### Using OpenAI (Default)
+```bash
+OPENAI_API_KEY=your-openai-api-key
+AI_PROVIDER=openai
+```
+
+### Using Google Gemini
+```bash
+GEMINI_API_KEY=your-google-gemini-api-key
+AI_PROVIDER=gemini
+```
+
+**Note**: You only need to configure one AI provider. The application will automatically use the specified provider for all AI features including:
+- Curriculum generation
+- Chat responses
+- Resource recommendations
+- Daily learning prompts
 
 ## Features in Detail
 
